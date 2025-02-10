@@ -292,7 +292,7 @@ public interface StocktakingMapper {
             LEFT JOIN TB_WHMST w ON l.warehouse_code=w.warehouse_code
             LEFT JOIN TB_CUSTMST cus ON w.customer_code=cus.customer_code
             LEFT JOIN TB_ITEMSUB its ON cus.item_code=its.item_common_code
-            WHERE l.warehouse_code=#{warehouseCode} AND l.located=1 AND l.location_active=1 AND its.item_sub_active=1
+            WHERE l.warehouse_code=#{warehouseCode} AND l.located=1 AND l.location_active=1
             """)
     Set<Integer> getAllLocated(String warehouseCode);
 
