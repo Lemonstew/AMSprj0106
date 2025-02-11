@@ -91,7 +91,7 @@ public interface InstallMapper {
             WHERE item_common_code = #{itemCommonCode}
               AND item_sub_active = 1
               AND current_common_code='WHS'
-            ORDER BY item_sub_key DESC
+            ORDER BY item_sub_key ASC
             LIMIT #{num}
             """)
     List<String> getSerials(String itemCommonCode, int num);
