@@ -235,17 +235,13 @@ public class StocktakingService {
             // 다른 회사의 물품 등록 불가
             int compare = mapper.compareSerialNoWithItemCode(serialNo, itemCode);
             if (compare == 1) {
-
                 String currentLocated = mapper.findLocation(serialNo);
-
                 if (currentLocated.equals("WHS")) {
                     Integer locKey = mapper.findLocationKey(serialNo);
                     mapper.putOffLocated(locKey);
                 } else {
-
                     mapper.updateCurrentCommonCodeBySerialNo(serialNo, currentCommonCode);
                 }
-
 
 //            로케이션 키값 변경
                 int updateLocation = mapper.updateLocationAtInstkSub(locationKey, serialNo);
@@ -254,16 +250,13 @@ public class StocktakingService {
                 Integer located = 1;
                 int insertLocation = mapper.updateLocated(locationKey, located);
 
-
                 // 실사 번호 생성
                 String stocktakingCode = "STK";
                 Integer maxNo = mapper.viewMaxOutputNo(stocktakingCode);
                 String newNumber = String.format("%03d", (maxNo == null) ? 1 : maxNo + 1);
                 stocktakingItem.setNewStocktakingNo(stocktakingCode + newNumber);
                 String inoutNo = stocktakingItem.getNewStocktakingNo();
-
                 int insertInoutHistory = mapper.addInoutHistoryPlus(serialNo, warehouseCode, inoutCommonCode, employeeNo, locationKey, inoutNo);
-
 //
                 return updateLocation == 1 && insertLocation == 1 && insertInoutHistory == 1;
             } else {
